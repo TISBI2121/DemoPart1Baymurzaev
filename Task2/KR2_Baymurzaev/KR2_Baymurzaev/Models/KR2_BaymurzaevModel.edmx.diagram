@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b2e27c5c91f440a19577d0cce2cc059b" Name="Diagram1">
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.Departament" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.Platforms" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.Role" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.Task" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.TaskPlatforms" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.TaskUser" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KR2BaymurzaevModel.User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_Task_Departament" ManuallyRouted="false" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_User_Departament" ManuallyRouted="false" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_TaskPlatforms_Platforms" ManuallyRouted="false" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_TaskPlatforms_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_TaskUser_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="KR2BaymurzaevModel.FK_TaskUser_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

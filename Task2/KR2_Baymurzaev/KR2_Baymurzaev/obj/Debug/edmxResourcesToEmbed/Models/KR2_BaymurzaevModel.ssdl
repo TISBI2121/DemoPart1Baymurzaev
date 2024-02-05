@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище KR2BaymurzaevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Departament">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Platforms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AskDate" Type="date" Nullable="false" />
+    <Property Name="Deadline" Type="date" Nullable="false" />
+    <Property Name="Requirement" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="DepartamentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskPlatforms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="PlatformId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="UsertId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Starus" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="Pass" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Rate" Type="float" Nullable="false" />
+    <Property Name="DepartamentId" Type="int" Nullable="false" />
+    <Property Name="StackDescription" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="DutiDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Task_Departament">
+    <End Role="Departament" Type="Self.Departament" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departament">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="DepartamentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskPlatforms_Platforms">
+    <End Role="Platforms" Type="Self.Platforms" Multiplicity="1" />
+    <End Role="TaskPlatforms" Type="Self.TaskPlatforms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platforms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskPlatforms">
+        <PropertyRef Name="PlatformId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskPlatforms_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="TaskPlatforms" Type="Self.TaskPlatforms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskPlatforms">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskUser_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="TaskUser" Type="Self.TaskUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskUser">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskUser_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="TaskUser" Type="Self.TaskUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskUser">
+        <PropertyRef Name="UsertId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Departament">
+    <End Role="Departament" Type="Self.Departament" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departament">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="DepartamentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище KR2BaymurzaevModelContainer">
+    <EntitySet Name="Departament" EntityType="Self.Departament" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Platforms" EntityType="Self.Platforms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskPlatforms" EntityType="Self.TaskPlatforms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskUser" EntityType="Self.TaskUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Task_Departament" Association="Self.FK_Task_Departament">
+      <End Role="Departament" EntitySet="Departament" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskPlatforms_Platforms" Association="Self.FK_TaskPlatforms_Platforms">
+      <End Role="Platforms" EntitySet="Platforms" />
+      <End Role="TaskPlatforms" EntitySet="TaskPlatforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskPlatforms_Task" Association="Self.FK_TaskPlatforms_Task">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="TaskPlatforms" EntitySet="TaskPlatforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskUser_Task" Association="Self.FK_TaskUser_Task">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="TaskUser" EntitySet="TaskUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskUser_User" Association="Self.FK_TaskUser_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="TaskUser" EntitySet="TaskUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Departament" Association="Self.FK_User_Departament">
+      <End Role="Departament" EntitySet="Departament" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
